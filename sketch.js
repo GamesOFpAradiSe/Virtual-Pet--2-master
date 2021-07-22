@@ -1,6 +1,6 @@
 //Create variables here
 var  dog, happyDog, database, foodS, foodStock
-
+var hour
 function preload()
 {
 	//load images here
@@ -16,6 +16,7 @@ function setup() {
   dog.addImage(doge)
   dog.scale =0.1
   
+  hour = hour()
   
 
   
@@ -26,7 +27,6 @@ database = firebase.database()
 //Here they checking for any types of change in data
   foodStock.on('value',readStock)
   food = new Food()
-  food.display()
 
   
 
@@ -34,29 +34,48 @@ database = firebase.database()
 
 
 function draw() {  
-background("blue")
+background(bg)
   drawSprites();
   //add styles here
 textFont('Italic')
-textSize(15)
-fill("white")
-stroke("black")
-strokeWeight(2)
-text(foodS,250,350)
+textSize(25)
+fill("green")
+stroke("green")
+strokeWeight(1)
+text("no. of bottel : "+foodS,560,130)
+if(hour<=12){
+text("last feeded time : "+hour+" am",600,180)
+}else {text("last feeded time : "+hour+" pm",600,180)}
 text(mouseX+","+mouseY,width/2,height/2)
+
+food.display()
 
 
 if(foodS<=0){
   foodS = 0
-  
+  textFont('Italic')
+textSize(25)
+fill("green")
+stroke("green")
+strokeWeight(2)
+        text("Bottels are empty click on add food",400,50)
       }
-
+      if(foodS>=30){
+        foodS = 30
+        textFont('Italic')
+textSize(25)
+fill("green")
+stroke("green")
+strokeWeight(2)
+        text("You can't add more than 30 bottel",400,50)
+       
+            }
 
 }
-//making readStock function
-function readStock(data){
 
-  foodS = data.val()
+ async function readStock(data){
+
+  foodS = await data.val()
 
 }
 

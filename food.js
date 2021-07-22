@@ -2,23 +2,21 @@ class Food{
     constructor(){
     
         this.image = loadImage("images/Milk.png")
-        this.foodStock = 0
+    
     
     }
     
     display(){
     
-      
-    var button = createButton("ADD FOOD")
-    button.position(845,505)
     
+
+    var button = createButton("ADD FOOD")
+    button.position(845,495)
+      
     var button2 = createButton("FEED FOOD")
-    button2.position(1000,505)
+    button2.position(1000,495)
 
-    if(foodS>=20){
-button.hide()
-
-    }
+   
 
     button.mousePressed(function(){
     
@@ -32,30 +30,22 @@ button.hide()
          
          })
 
-         var x=80,y=100
+  var x=80,y=400;
 
-         imageMode(CENTER)
-         image(this.image,720,220,70,70);
-         
-        
+ 
 
-        if(this.foodStock!=0){
+  if(foodS!=0){
+for(var i=0;i<foodS;i++){
+if(i%10==0){
+x=100
+y=y+30
+}
+image(this.image,x,y,50,50)
+x=x+30
+}
+  
 
-            for(var i=0;i<this.foodStock;i++){
-            if(i%10==0){
-            x=80
-            y=y+50
-            
-            
-            }
-            
-            image(this.image,x,y,50,50);
-            x=x+30
-            
-            }
-            
-                     }
-                
+  }
             
                 }
                 
